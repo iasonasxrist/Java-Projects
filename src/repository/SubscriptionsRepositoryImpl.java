@@ -5,7 +5,6 @@ import model.people.Person;
 import semester.Semester;
 
 import java.util.*;
-import java.util.HashMap;
 
 public class SubscriptionsRepositoryImpl {
     /*hashCode in Semester is used to assign Semesters in each cell of hash table */
@@ -20,6 +19,16 @@ public class SubscriptionsRepositoryImpl {
             subscriptionsPerSemester.get(AM).put(semester, new ArrayList<>());
         }
         subscriptionsPerSemester.get(AM).get(semester).add(course);
+    }
+
+    public List<Courses> getAllSubscribedCoursesByAM (Integer AM){
+        List<Courses> coursesList = new ArrayList<>();
+        for (Map.Entry<Integer, HashMap<Semester, List<Courses>>> subsPerAM : subscriptionsPerSemester.entrySet()){
+            for (Map.Entry<Semester, List<Courses>> subsPerSemester : subsPerAM.getValue().entrySet()){
+                coursesList.addAll(subsPerSemester.getValue());
+            }
+        }
+        return coursesList;
     }
 
     public void print(){

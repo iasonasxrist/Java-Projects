@@ -1,6 +1,8 @@
 import model.courses.Lab;
 import model.courses.Theory;
+import model.grades.GradePerCourse;
 import model.people.Teacher;
+import repository.GradesRepository;
 import repository.PeopleRepositoryImpl;
 import repository.PeopleRepositoryInterface;
 import model.people.PostGraduate;
@@ -26,6 +28,13 @@ public class Main {
         subscriptionsRepository.subscribe(undergraduate, new Semester(EPOCH.SUMMER, 2023),  lab );
         subscriptionsRepository.subscribe(postGraduate, new Semester(EPOCH.SUMMER, 2023), theory);
         subscriptionsRepository.print();
+
+        GradesRepository studentGrades = new GradesRepository();
+        studentGrades.add(3, lab, undergraduate, (float) 8.0 );
+        studentGrades.add(3, lab, undergraduate, (float) 5.0 );
+
+        studentGrades.print();
+        studentGrades.checkStudentStatus(3, subscriptionsRepository, 5);
         /*
         PeopleRepositoryInterface  peopleRepository = new PeopleRepositoryImpl();
         peopleRepository.add(undergraduate);
