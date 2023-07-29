@@ -7,7 +7,12 @@ import java.util.ArrayList;
 
 public class CoursesRepositoryImpl implements CoursesRepositoryInterface{
 
-    List<Courses> coursesList = new ArrayList<>();
+    List<Courses> coursesList;
+
+    public CoursesRepositoryImpl() {
+        coursesList = new ArrayList<>();
+    }
+
     @Override
     public void add(Courses course) {
         coursesList.add(course);

@@ -1,18 +1,19 @@
+import model.courses.Courses;
 import model.courses.Lab;
 import model.courses.Theory;
 import model.grades.GradePerCourse;
+import model.people.Person;
 import model.people.Teacher;
-import repository.GradesRepository;
-import repository.PeopleRepositoryImpl;
-import repository.PeopleRepositoryInterface;
+import model.utils.FIFO;
+import model.utils.FIFOException;
+import repository.*;
 import model.people.PostGraduate;
 import model.people.Undergraduate;
-import repository.SubscriptionsRepositoryImpl;
 import semester.EPOCH;
 import semester.Semester;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FIFOException {
 
         SubscriptionsRepositoryImpl subscriptionsRepository = new SubscriptionsRepositoryImpl();
         Undergraduate undergraduate = new Undergraduate(1, "Kalia", "Elounta", 15);
@@ -35,7 +36,7 @@ public class Main {
 
         studentGrades.print();
         studentGrades.checkStudentStatus(3, subscriptionsRepository, 5);
-        /*
+
         PeopleRepositoryInterface  peopleRepository = new PeopleRepositoryImpl();
         peopleRepository.add(undergraduate);
         peopleRepository.add(postGraduate);
@@ -44,7 +45,26 @@ public class Main {
         System.out.println("*****************************");
         peopleRepository.deleteByAM(1);
         peopleRepository.print();
-        */
+
+
+        CoursesRepositoryImpl coursesRepository = new CoursesRepositoryImpl();
+        Courses advancedMaths = new Theory("HRY12", "Advanced Mathematics", "Differential Equations", new Semester(EPOCH.WINTER, 2024), teacher);
+        coursesRepository.add(theory);
+        coursesRepository.add(advancedMaths);
+        coursesRepository.print();
+
+
+        FIFO<Person> peopleOfQueue  = new FIFO<>();
+        peopleOfQueue.add(undergraduate);
+        peopleOfQueue.add(postGraduate);
+        System.out.println(peopleOfQueue.first());
+        try {
+            peopleOfQueue.pop();
+        }
+        catch (FIFOException fifoException){
+            System.out.println(fifoException);
+        }
+        System.out.println(peopleOfQueue.first());
 
     }
 }
