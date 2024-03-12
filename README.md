@@ -26,4 +26,16 @@ This Java project demonstrates various features including object-oriented progra
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/iasonasxrist/Java-Repository-for-Open-Projects.git
+```
+2. Navigate to the project directory:
+```bash
+cd your-repo
+```
+3. Compile the Java files:
+``` bash
+javac Main.java
+```
+4.Run the.jar executable:
+```bash
+java -jar YourApp.jar
